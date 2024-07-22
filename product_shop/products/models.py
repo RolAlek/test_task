@@ -25,6 +25,10 @@ class BaseModel(models.Model):
 class Category(BaseModel):
     image = models.ImageField(upload_to="category/images/")
 
+    class Meta:
+        verbose_name = "категория"
+        verbose_name_plural = "категории"
+
 
 class SubCategory(BaseModel):
     image = models.ImageField(upload_to="category/subcategory/images/")
@@ -33,6 +37,10 @@ class SubCategory(BaseModel):
         on_delete=models.CASCADE,
         related_name="sub_categories",
     )
+
+    class Meta:
+        verbose_name = "подкатегория"
+        verbose_name_plural = "подкатегории"
 
 
 class Product(BaseModel):
@@ -51,7 +59,10 @@ class Product(BaseModel):
         max_digits=10,
         verbose_name="Цена",
     )
-    image = models.ImageField(upload_to="products/original/")
+    image = models.ImageField(
+        upload_to="products/original/",
+        verbose_name="Изображение",
+    )
     thumb_image = models.ImageField(upload_to="products/images/")
     small_image = models.ImageField(upload_to="products/images/")
     large_image = models.ImageField(upload_to="products/images/")
@@ -77,3 +88,7 @@ class Product(BaseModel):
                     save=False,
                 )
         super(Product, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "продукт"
+        verbose_name_plural = "продукты"
